@@ -12,14 +12,12 @@ const profile = require('./controllers/profile');
 const db = require('knex')({
     client: 'pg',
     connection: {
-      host : '127.0.0.1',
+      host : 'postgresql-curly-94066',
       user : '',
       password : '',
       database : 'smart-brain'
     }
 });
-
-
 
 
 const app = express();
