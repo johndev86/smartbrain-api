@@ -6,6 +6,7 @@ const handleProfile = (req, res, db) => {
         if (user.length) {
             res.json(user[0]);
         } else {
+            console.log(process.env.DATABASE_URL)
             res.status(400).json('not found');
         }
     });
