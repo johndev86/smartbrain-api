@@ -2,8 +2,6 @@ const handleRegister = (req, res, db, bcrypt) => {
     const {email, name, password} = req.body;
     const hash = bcrypt.hashSync(password);
 
-    console.log(process.env.DATABASE_URL);
-
     db.transaction(trx => {
         return trx
             .insert({
@@ -21,7 +19,7 @@ const handleRegister = (req, res, db, bcrypt) => {
                     })
             });
     })
-    .catch(err => res.status(400).json('unable to register'));
+    .catch(err => console.log(err));
 }
 
 module.exports = {
