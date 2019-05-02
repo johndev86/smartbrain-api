@@ -18,7 +18,7 @@ const handleSignin = (req, res, db, bcrypt) => {
             .then(user => user[0])
             .catch(err => Promise.reject('error signing in'));
         } else {
-            return Promise.reject('invalid credentials');
+            Promise.reject('invalid credentials');
         }
     })
     .catch(Promise.reject('invalid credentials'));
