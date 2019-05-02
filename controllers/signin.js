@@ -40,11 +40,11 @@ const signToken = (id) => {
 }
 
 const setToken = (key, value) => {
-    console.log('setting token', key, value);
     return Promise.resolve(redisClient.set(key, value));
 }
 
 const createSession = (user) => {
+    console.log(user);
     const { id } = user;
     const token = signToken(id);
     return setToken(token, id)
