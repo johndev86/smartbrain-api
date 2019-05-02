@@ -44,9 +44,9 @@ const setToken = (key, value) => {
 }
 
 const createSession = (user) => {
-    console.log(user);
     const { id } = user;
     const token = signToken(id);
+    console.log(token, id);
     return setToken(token, id)
     .then(() => ({success: 'true', token}))
     .catch(console.log);
