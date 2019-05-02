@@ -18,10 +18,10 @@ const handleSignin = (req, res, db, bcrypt) => {
             .then(user => user[0])
             .catch(err => Promise.reject('error signing in'));
         } else {
-            Promise.reject('invalid credentials');
+            return Promise.reject('invalid credentials');
         }
     })
-    .catch(Promise.reject('invalid credentials'));
+    .catch(() => Promise.reject('invalid credentials'));
 }
 
 const getAuthTokenId = (req, res) => {
