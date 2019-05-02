@@ -56,11 +56,10 @@ const signinAuthentication = (req, res, db, bcrypt) => {
     authorization ? getAuthTokenId(req, res) : 
         handleSignin(req, res, db, bcrypt)
         .then(data => {
-            console.log(data);
-            return data.id && data.email ? createSession(data) : Promise.reject(data);
+            console.log(data.id && data.email);
+            return (data.id && data.email) ? createSession(data) : Promise.reject(data);
         })
         .then(session => {
-            console.log(session);
             return res.json(session)
         })
         .catch(err => res.status(400).json(err));
