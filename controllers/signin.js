@@ -13,13 +13,9 @@ const handleSignin = (req, res, db, bcrypt) => {
 
     return db.select('email', 'hash').from('login').where('email','=',email)
     .then(login=>{
-        console.log(login);
         if (login.length && bcrypt.compareSync(password,login[0].hash)) {
             return db.select('*').from('users').where('email','=',email)
-            .then(user => {
-                console.log(user);
-                return user[0];
-            })
+            .then(user => user[0])
             .catch(err => Promise.reject('error signing in'));
         } else {
             return Promise.reject('invalid credentials');
@@ -60,9 +56,13 @@ const signinAuthentication = (req, res, db, bcrypt) => {
     authorization ? getAuthTokenId(req, res) : 
         handleSignin(req, res, db, bcrypt)
         .then(data => {
+            console.log(data);
             return data.id && data.email ? createSession(data) : Promise.reject(data);
         })
-        .then(session => res.json(session))
+        .then(session => {
+            console.log(session);
+            return res.json(session)
+        })
         .catch(err => res.status(400).json(err));
 }
 
